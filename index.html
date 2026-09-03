@@ -725,6 +725,18 @@ const DEFAULT_PHASES = [
   {id:'ph6',title:'Finishing & Handover',   status:'pending',desc:'Flooring, painting, fixtures and final inspection.',        assignee:'',order:6},
 ];
 
+/* Default Firebase config (will auto-connect if none saved) */
+const DEFAULT_FBCFG = {
+  apiKey: "AIzaSyAs8yk6yUy_ZlZqET2Mu1r1_X6ptR4FQLM",
+  authDomain: "g10pro.firebaseapp.com",
+  databaseURL: "https://g10pro-default-rtdb.firebaseio.com",
+  projectId: "g10pro",
+  storageBucket: "g10pro.firebasestorage.app",
+  messagingSenderId: "1095722530345",
+  appId: "1:1095722530345:web:0551fe9b4f47114b100e38",
+  measurementId: "G-1SJPX54YXD"
+};
+
 /* ════════════════════════════════════════════════════
    STATE
 ════════════════════════════════════════════════════ */
@@ -849,7 +861,7 @@ function dbRemove(path){
 window.addEventListener('load', ()=>{
   setTimeout(()=>{
     hideSplash();
-    const savedCfg = lget('g10_fbcfg');
+    const savedCfg = lget('g10_fbcfg') || DEFAULT_FBCFG;
     if(savedCfg && savedCfg.databaseURL){
       const ok = initFirebase(savedCfg);
       if(!ok) { showScr('setupScr'); return; }
